@@ -22,17 +22,17 @@ public class LiveTest {
     }
     
     @Test
-    public void givenUser_whenGetAllFoos_thenOK() {
-        final Response response = givenAuth("user", "pass").get(APP_ROOT + "/foos");
-        assertEquals(200, response.getStatusCode());
-    }
-    
-    @Test
     public void givenUser_whenResourceCreated_then201Created() {
         final Response response = givenAuth("user", "pass").contentType(MediaType.APPLICATION_JSON.toString()).body(resourceString()).post(APP_ROOT + "/user");
         assertEquals(201, response.getStatusCode());
     }
 
+    /*@Test
+    public void givenUser_whenGetAllFoos_thenOK() {
+        final Response response = givenAuth("user", "pass").get(APP_ROOT + "/foos");
+        assertEquals(200, response.getStatusCode());
+    }*/
+    
     
 
     //
