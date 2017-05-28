@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,21 +30,18 @@ public class FooController {
 
     // API - read
 
-    @GetMapping("/foos/{id}")
-    @ResponseBody
+    @GetMapping("/foos/{id}")    
     @Validated
     public Foo findById(@PathVariable @Min(0) final long id) {
         return repo.findById(id).orElse(null);
     }
 
-    @GetMapping
-    @ResponseBody
+    @GetMapping    
     public List<Foo> findAll() {               
         return repo.findAll();
     }
 
-    @GetMapping(params = { "page", "size" })
-    @ResponseBody
+    @GetMapping(params = { "page", "size" })    
     @Validated
     public List<Foo> findPaginated(@RequestParam("page") @Min(0) final int page, @Max(100) @RequestParam("size") final int size) {
         return repo.findAll(PageRequest.of(page, size)).getContent();
@@ -54,8 +50,7 @@ public class FooController {
     // API - write
 
     @PutMapping("/foos/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)    
     public Foo update(@PathVariable("id") final String id, @RequestBody final Foo foo) {
         return foo;
     }
